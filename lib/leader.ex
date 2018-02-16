@@ -1,3 +1,5 @@
+# Robert Holland (rh2515) and Chris Hawkes (ch3915)
+
 defmodule Leader do
     def start config do
         receive do
@@ -54,9 +56,9 @@ defmodule Leader do
                 else
                     # ignore / do nothing
                     next proposals, active, replicas, ballot_number, acceptors
-                end 
+                end
         end
-        
+
     end
 
     def pmax pvals do

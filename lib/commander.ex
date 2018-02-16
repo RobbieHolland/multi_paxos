@@ -1,3 +1,5 @@
+# Robert Holland (rh2515) and Chris Hawkes (ch3915)
+
 defmodule Commander do
     def start leader, acceptors, replicas, data do
         waitfor = acceptors

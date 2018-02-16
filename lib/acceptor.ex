@@ -1,3 +1,5 @@
+# Robert Holland (rh2515) and Chris Hawkes (ch3915)
+
 defmodule Acceptor do
     def start config do
         next 0, MapSet.new

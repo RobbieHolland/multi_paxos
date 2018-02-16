@@ -1,3 +1,5 @@
+# Robert Holland (rh2515) and Chris Hawkes (ch3915)
+
 defmodule Scout do
     def start leader, acceptors, b do
         for a <- acceptors, do: send a, {:p1a, self(), b}

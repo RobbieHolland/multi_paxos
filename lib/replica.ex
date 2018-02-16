@@ -1,3 +1,5 @@
+# Robert Holland (rh2515) and Chris Hawkes (ch3915)
+
 defmodule Replica do
     def start config, database, monitor do
         receive do
@@ -12,7 +14,7 @@ defmodule Replica do
                     |> Map.put(:database, database)
                     |> Map.put(:monitor, monitor)
                     |> Map.put(:leaders, leaders)
-                
+
                 next state
         end
     end
@@ -69,7 +71,7 @@ defmodule Replica do
                 for l <- leaders do
                     send l, {:propose, slot_in, c}
                 end
-                state 
+                state
                     |> Map.update!(:proposals, &(MapSet.put &1, {slot_in, c}))
                     |> Map.put(:requests, tail)
             else
