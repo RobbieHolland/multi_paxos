@@ -24,7 +24,7 @@ defp next config, clock, requests, updates, transactions do
     transactions = 
       case Map.get transactions, seqnum do
       nil ->
-        # IO.puts "db #{db} seq #{seqnum} #{done}"
+        #IO.puts "db #{db} seq #{seqnum} #{done} #{amount} #{from} #{to}"
         Map.put transactions, seqnum, %{ amount: amount, from: from, to: to }   
 
       t -> # already logged - check transaction

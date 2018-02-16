@@ -1,5 +1,5 @@
 defmodule Acceptor do
-    def start do
+    def start config do
         next 0, MapSet.new
     end
 

@@ -9,10 +9,10 @@ defmodule Scout do
         receive do
             {:p1b, acceptor, b_prime, r} ->
                 if b_prime == b do
-                    p_values = MapSet.put p_values, r
+                    p_values = MapSet.union p_values, r
                     wait_for = List.delete wait_for, acceptor
 
-                    if length wait_for < (n / 2) do
+                    if length(wait_for) < (n / 2) do
                         send leader, {:adopted, b, p_values}
                         Process.exit self(), :normal
                     end
