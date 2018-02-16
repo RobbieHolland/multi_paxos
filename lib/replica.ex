@@ -59,7 +59,7 @@ defmodule Replica do
     end
 
     def propose %{:leaders => leaders, :decisions => decisions, :slot_in => slot_in} = state do
-        window = 1
+        window = state[:config].window
         if (state[:slot_in] < state[:slot_out] + window) and (state[:requests] != []) do
 
             taken_slots = for {^slot_in, _} <- decisions, do: true
