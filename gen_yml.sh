@@ -8,6 +8,7 @@ CONFIG=$2
 SETUP=$3
 SERVERS=$4
 CLIENTS=$5
+WINDOW=$6
 
 FILE=docker-compose.yml
 
@@ -39,7 +40,7 @@ services:
     container_name: paxos
     command: > 
       elixir --name paxos@paxos.localdomain --cookie pass 
-             -S mix run --no-halt -e ${MAIN} ${CONFIG} ${SETUP} ${SERVERS} ${CLIENTS} 
+             -S mix run --no-halt -e ${MAIN} ${CONFIG} ${SETUP} ${SERVERS} ${CLIENTS} ${WINDOW}
     depends_on:
 ENDHEADER
 
