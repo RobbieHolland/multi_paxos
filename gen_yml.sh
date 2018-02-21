@@ -9,6 +9,7 @@ SETUP=$3
 SERVERS=$4
 CLIENTS=$5
 WINDOW=$6
+RANDOM_WAIT=$7
 
 FILE=docker-compose.yml
 
@@ -18,7 +19,7 @@ cat > $FILE << ENDHEADER
 # distributed algorithms, n.dulay, 2 feb 18
 # coursework 2 - paxos made moderately complex
 
-# docker-compose.yml v1  
+# docker-compose.yml v1
 
 version: "3.4"
 
@@ -38,21 +39,21 @@ networks:
 services:
   paxos.localdomain:
     container_name: paxos
-    command: > 
-      elixir --name paxos@paxos.localdomain --cookie pass 
-             -S mix run --no-halt -e ${MAIN} ${CONFIG} ${SETUP} ${SERVERS} ${CLIENTS} ${WINDOW}
+    command: >
+      elixir --name paxos@paxos.localdomain --cookie pass
+             -S mix run --no-halt -e ${MAIN} ${CONFIG} ${SETUP} ${SERVERS} ${CLIENTS} ${WINDOW} ${RANDOM_WAIT}
     depends_on:
 ENDHEADER
 
 for k in $(seq 1 $SERVERS)
-do 
+do
   cat >> $FILE << ENDSERVERS
       - server${k}.localdomain
 ENDSERVERS
 done
 
 for k in $(seq 1 $CLIENTS)
-do 
+do
   cat >> $FILE << ENDCLIENTS
       - client${k}.localdomain
 ENDCLIENTS
@@ -65,13 +66,13 @@ ENDHEADER
 
 # ----------------------------------------------------------
 for k in $(seq 1 $SERVERS)
-do 
+do
   cat >> $FILE << ENDSERVERS
   server${k}.localdomain:
     container_name: server${k}
-    command: > 
-      elixir --name server${k}@server${k}.localdomain --cookie pass 
-             -S mix run --no-halt 
+    command: >
+      elixir --name server${k}@server${k}.localdomain --cookie pass
+             -S mix run --no-halt
     <<: *defaults
 
 ENDSERVERS
@@ -79,13 +80,13 @@ done
 
 # ----------------------------------------------------------
 for k in $(seq 1 $CLIENTS)
-do 
+do
   cat >> $FILE << ENDCLIENTS
   client${k}.localdomain:
     container_name: client${k}
-    command: > 
-      elixir --name client${k}@client${k}.localdomain --cookie pass 
-             -S mix run --no-halt 
+    command: >
+      elixir --name client${k}@client${k}.localdomain --cookie pass
+             -S mix run --no-halt
     <<: *defaults
 
 ENDCLIENTS
@@ -98,5 +99,3 @@ echo >> $FILE << ENDFOOTER
 # - tabs are a no-no, use spaces
 
 ENDFOOTER
-
-

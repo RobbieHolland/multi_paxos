@@ -53,7 +53,9 @@ defmodule Leader do
                     ballot_number = {r_prime + 1, self()}
 
                     # possibly wait a bit before scouting? - avoid livelock
-                    Process.sleep(Enum.random 1..50)
+                    if config[:random_wait] do
+                      Process.sleep(Enum.random 1..50)
+                    end
 
                     spawn Scout, :start, [self(), acceptors, ballot_number]
                     send config[:monitor], {:scout_spawned, config[:server_num]}

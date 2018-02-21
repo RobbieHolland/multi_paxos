@@ -7,6 +7,7 @@
 SERVERS = 3
 CLIENTS = 2
 WINDOW = 1
+RANDOM_WAIT=false
 
 CONFIG  = 1
 
@@ -21,14 +22,14 @@ PROJECT     = da347
 NETWORK     = $(PROJECT)_network
 
 # run all clients, servers and top-level component in a single node
-SINGLE	 = mix run --no-halt -e $(MAIN) $(CONFIG) $(SINGLE_SETUP) $(SERVERS) $(CLIENTS) $(WINDOW)
+SINGLE	 = mix run --no-halt -e $(MAIN) $(CONFIG) $(SINGLE_SETUP) $(SERVERS) $(CLIENTS) $(WINDOW) $(RANDOM_WAIT)
 
 # run each client, server and top-level component in its own Docker container
-GEN_YML	 = ./gen_yml.sh $(MAIN) $(CONFIG) $(DOCKER_SETUP) $(SERVERS) $(CLIENTS) $(WINDOW)
+GEN_YML	 = ./gen_yml.sh $(MAIN) $(CONFIG) $(DOCKER_SETUP) $(SERVERS) $(CLIENTS) $(WINDOW) $(RANDOM_WAIT)
 DOCKER   = docker-compose -p $(PROJECT)
 
 # run each client, server and top-level component on real hosts via ssh
-SSH      = MAIN=$(MAIN) CONFIG=$(CONFIG) SETUP=$(SSH_SETUP) SERVERS=$(SERVERS) CLIENTS=$(CLIENTS) WINDOW=$(WINDOW) ./ssh.sh
+SSH      = MAIN=$(MAIN) CONFIG=$(CONFIG) SETUP=$(SSH_SETUP) SERVERS=$(SERVERS) CLIENTS=$(CLIENTS) WINDOW=$(WINDOW) RANDOM_WAIT=$(RANDOM_WAIT) ./ssh.sh
 
 compile:
 	mix compile

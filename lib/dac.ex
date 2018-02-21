@@ -57,6 +57,9 @@ def get_config do
   # add window size
   config = Map.put config, :window, String.to_integer(Enum.at System.argv, 4)
 
+  # add random wait flag
+  config = Map.put config, :random_wait, String.to_existing_atom(Enum.at System.argv, 5)
+
   config
 end
 
