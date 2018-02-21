@@ -1,3 +1,5 @@
+# Robert Holland (rh2515) and Chris Hawkes (ch3915)
+
 #!/bin/bash
 
 # distributed algorithms, n.dulay 25 jan 18

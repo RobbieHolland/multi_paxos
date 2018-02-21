@@ -24,7 +24,7 @@ services:
     container_name: paxos
     command: >
       elixir --name paxos@paxos.localdomain --cookie pass
-             -S mix run --no-halt -e Paxos.main 1 docker 3 2 1 true
+             -S mix run --no-halt -e Paxos.main 1 docker 3 2 1 false
     depends_on:
       - server1.localdomain
       - server2.localdomain

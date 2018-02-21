@@ -1,3 +1,4 @@
+# Robert Holland (rh2515) and Chris Hawkes (ch3915)
 
 # distributed algorithms, n.dulay 2 feb 18
 # coursework 2, paxos made moderately complex
